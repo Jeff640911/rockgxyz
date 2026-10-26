@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>Mbox2</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.rockgxyz.mbox2.driver</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Mbox2</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>CFPlugInFactories</key>
+	<dict>
+		<key>B5BAF85F-F03F-4873-88C9-74834DA0CFCF</key>
+		<string>MboxHAL_Create</string>
+	</dict>
+	<key>CFPlugInTypes</key>
+	<dict>
+		<key>443ABAB8-E7B3-491A-B985-BEB9187030DB</key>
+		<array>
+			<string>B5BAF85F-F03F-4873-88C9-74834DA0CFCF</string>
+		</array>
+	</dict>
+	<key>AudioServerPlugIn_MachServices</key>
+	<array>
+		<string>com.rockgxyz.mboxd</string>
+	</array>
+</dict>
+</plist>

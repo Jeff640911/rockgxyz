@@ -1,0 +1,38 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y libusb-1.0-0-dev
+      - run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS="-Werror -fsanitize=address,undefined"
+      - run: cmake --build build -j
+      - run: ctest --test-dir build --output-on-failure
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install libusb
+      - run: cmake -S . -B build -DCMAKE_C_FLAGS="-Werror"
+      - run: cmake --build build -j
+      - run: ctest --test-dir build --output-on-failure
+      - name: Check plug-in bundle
+        run: |
+          test -f build/Mbox2.driver/Contents/MacOS/Mbox2
+          plutil -lint build/Mbox2.driver/Contents/Info.plist
+          nm -gU build/Mbox2.driver/Contents/MacOS/Mbox2 | grep -q _MboxHAL_Create
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mbox2-macos
+          path: |
+            build/Mbox2.driver
+            build/mboxd
+            build/mboxmidi
+            build/mboxctl
+            packaging
